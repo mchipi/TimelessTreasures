@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="container d-flex flex-column justify-content-center mb-3 "
+         style="background-color: #1E1E1E; width: 80%; ">
+        <div class="row align-items-center">
+            <div class="col ">
+                <div class="p-5 mt-5"></div>
+                <div class="p-2 ">
+                    <h1 class="text-center display-1"><a class="navbar-brand logo_tt" href="{% url 'index' %}"><span
+                            class="logo_tt"
+                            style="color: #CF9963; margin-right: 0">timeless</span>
+                        <span class="logo_tt" style="color: #AABA78; margin-left: 0;">treasures</span></a>
+                    </h1>
+                </div>
+                <div class="container d-inline-flex p-2 justify-content-center mb-3">
+                    <input type="search" id="form1" class="form-control form-control-lg"
+                           style="width: 80%; background-color: #2F3234; border-color: #878889; color: #ADB5BD"
+                           placeholder="search handmade and restored..."
+                           aria-label="Search"/>
+                </div>
+                <div class="container d-inline-flex justify-content-center">
+                    <a href="{% url 'index' %}" class="btn text-white p-2"
+                       style="width: 31.5%; background-color: #CF9963">start
+                        diggin'</a>
+                </div>
+                <div class="container d-inline-flex justify-content-center">
+                    <p class="text-center fs-5" style="color: white"><a href="{% url 'index' %}"
+                                                                        class="link-underline link-underline-opacity-0"
+                                                                        style="color: #AABA78">join</a> this community
+                        or <a
+                                class="link-underline link-underline-opacity-0" href="{% url 'login' %}"
+                                style="color: #AABA78">welcome
+                            back :)</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <style>
+        .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #ADB5BD;
+            opacity: 1; /* Firefox */
+        }
+
+        .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #ADB5BD;
+        }
+
+        .form-control::-ms-input-placeholder { /* Microsoft Edge */
+            color: #ADB5BD;
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block title %}
+    <title>TimelessTreasures</title>
+{% endblock %}

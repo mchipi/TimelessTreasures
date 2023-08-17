@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+    <body>
+
+    <div class="container card justify-content-center p-4"
+         style="background-color: #2B2A29; margin-top: 30px; margin-bottom: 30px;">
+        <h1 style="color: #CF9963" class="mt-3 text-center">New Item to Storefront</h1>
+        <h1 style="margin-top: -20px;" class="mb-5 text-white text-center">______________________________________</h1>
+        <form method="post" action="{% url 'add_product' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row row-cols-2 mb-4">
+                <div class="col">
+                    <label for="{{ form.title.id_for_label }}" class="h5 text-white">title</label>
+                    {{ form.title }}
+                </div>
+                <div class="col">
+                    <label for="{{ form.shipping_info.id_for_label }}" class="h5 text-white">shipping
+                        information</label>
+                    {{ form.shipping_info }}
+                </div>
+            </div>
+            <div class="row row-cols-2 mb-4">
+                <div class="col">
+                    <label for="{{ form.summary.id_for_label }}" class="h5 text-white">short summary</label>
+                    {{ form.summary }}
+                </div>
+                <div class="col">
+                    <label for="{{ form.price.id_for_label }}" class="h5 text-white">price</label>
+                    {{ form.price }}
+                </div>
+            </div>
+            <div class="row row-cols-2 mb-4">
+                <div class="col">
+                    <label for="{{ form.description.id_for_label }}" class="h5 text-white">product description</label>
+                    {{ form.description }}
+                </div>
+                <div class="col">
+                    <label for="{{ form.img.id_for_label }}" class="h5 text-white">image</label>
+                    {{ form.img }}
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col">
+                    <label for="{{ form.specs.id_for_label }}" class="h5 text-white">specifications</label>
+                    {{ form.specs }}
+                </div>
+                <div class="col d-flex align-items-end flex-column mb-3" >
+                    <div class="mt-auto">
+                        <button class="btn text-white" style="background-color: #CF9963">add to storefront</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+    </body>
+{% endblock %}
+
+{% block title %}
+    <title>New Product</title>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{% block content %}
+    <body>
+
+    {% if request.path == "/list/" %}
+        <div class="container d-flex flex-column justify-content-center mb-3 "
+             style="background-color: #1E1E1E; width: 80%; ">
+            <div class="row align-items-center">
+                <div class="col ">
+                    <div class="p-2 ">
+                        <h1 class="text-center display-1"><a class="navbar-brand logo_tt" href="{% url 'list' %}"><span
+                                class="logo_tt"
+                                style="color: #CF9963; margin-right: 0">timeless</span>
+                            <span class="logo_tt" style="color: #AABA78; margin-left: 0;">treasures</span></a>
+                        </h1>
+                    </div>
+                    <div class="container d-inline-flex p-2 justify-content-center mb-3">
+                        <input type="search" id="form1" class="form-control form-control-lg"
+                               style="width: 80%;  background-color: #2F3234; border-color: #878889; color: #ADB5BD"
+                               placeholder="search handmade and restored..."
+                               aria-label="Search"/>
+                    </div>
+                    <div class="container d-inline-flex justify-content-center">
+                        <a href="{% url 'add_product' %}" class="btn text-black p-3 mb-5"
+                           style="width: 30%; background-color: #CF9963;">add product to my storefront</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif request.path == "/favorites/" %}
+        </br>
+        <h1 class="text-center" style="color: #ABB5BE">my favorites</h1>
+        </br>
+    {% elif request.path ==  "/my_store/" %}
+        </br>
+        <h1 class="text-center" style="color: #ABB5BE">my storefront</h1>
+        </br>
+    {% endif %}
+
+
+    {% if products %}
+
+
+        <div class="container">
+            <div class="row">
+                {% for p in products %}
+                    <div class="col-md-3 mb-4">
+                        <!-- Your product card or content here -->
+                        <a href="{% url 'details' p.id %}" class="card-link text-decoration-none">
+                        <div class="card" style="background-color: #171716; border: 1px solid #DEE2E6;">
+                            <img class="card-img-top img-fluid" src="../../data/{{ p.img }}" alt="{{ p.img }}">
+                            <div class="card-body">
+                                <h4 class="card-title" style="color: #DDB389">{{ p.title }}</h4>
+                                <p class="card-text text-white" >{{ p.summary }}</p>
+                                <p class="card-text" ><small style="color: #6C757D; " >{{ p.seller.username }}</small></p>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                        </div>
+                        <div class="row">
+                    {% endif %}
+                {% endfor %}
+                </div>
+        </div>
+
+    {% endif %}
+
+    </body>
+
+    <style>
+        .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #ADB5BD;
+            opacity: 1; /* Firefox */
+        }
+
+        .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #ADB5BD;
+        }
+
+        .form-control::-ms-input-placeholder { /* Microsoft Edge */
+            color: #ADB5BD;
+        }
+    </style>
+
+{% endblock %}
+{% block title %}
+    <title>TimelessTreasures</title>
+{% endblock %}

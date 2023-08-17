@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block content %}
+    <body>
+
+    <div class=" container-fluid card mb-5 mt-5 text-white" style="background-color: #2B2A29;">
+        <div class="row g-0">
+
+            <div class="col-4 mt-3 mb-3 " style=" width: 30%;">
+                <img src="../../data/{{ product.img }}" class="image-fluid" style="object-fit:cover; width: 100%"
+                     alt="{{ product.img }}">
+            </div>
+
+            <div class="col-md-8 ms-4">
+                <div class="card-body" style="position: relative; height: 100%;">
+                    <h3 class="card-title p-2" style="color: #CF9963">{{ product.title }}</h3>
+                    <p class="mb-5" style="margin-top: -20px; color: #DEE2E6;">
+                        ____________________________________________________________________________</p>
+                    <p class="card-text" style="white-space: pre-line;">{{ product.summary }}</p>
+                    <p class="card-text" style="white-space: pre-line;">{{ product.specs }}</p>
+
+                    <div class="container mb-2" style="position: absolute; bottom: 0">
+                        <div class="row justify-content-between" >
+
+                            <div class="col-4">
+                                <div>
+                                    <span class="h3 me-2 mt-2">${{ product.price }}</span>
+                                    {% if product.seller != request.user %}
+                                        <a href="{% url 'buy' product.id %}" class="btn text-white mb-2"
+                                           style=" background-color: #CF9963;">buy now</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            {% if product.seller != request.user %}
+                                <div class="col-4 text-end">
+                                    {% if favorite %}
+                                        <a href="{% url 'remove_from_favorites' product.id %}">
+                                            <i class="bi bi-heart-fill text-white h3"></i></a>
+                                    {% else %}
+                                        <a href="{% url 'add_to_favorites' product.id %}">
+                                            <i class="bi bi-heart text-white h3"></i></a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ul class="nav nav-tabs container-fluid">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#" style="color: #D9C3AC;">Product Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Specifications</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Shipping Information</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Seller Info</a>
+        </li>
+    </ul>
+
+
+    <div class="container-fluid mb-5 mt-3 text-white" style="white-space: pre-line;">
+        {{ product.description }}
+    </div>
+
+
+    </body>
+
+    <style>
+        .nav-tabs .nav-item .nav-link {
+            border: 1px solid transparent; /* Remove the default border */
+        }
+
+        .nav-tabs .nav-item .nav-link.active {
+            border-color: #D9C3AC;
+            border-bottom: transparent;
+            background-color: transparent; /* Add border color for active tab */
+        }
+
+        .nav-tabs .nav-item .nav-link {
+            color: #CF9963; /* Change text color for inactive tabs */
+        }
+    </style>
+{% endblock %}
+{% block title %}
+    <title>{{ product.title }}</title>
+{% endblock %}

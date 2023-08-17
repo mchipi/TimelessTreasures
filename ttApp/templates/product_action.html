@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block content %}
+    <body>
+
+    {% if product.bought %}
+        <div class="container card text-center mt-4" style="background-color: #2B2A29;">
+            <div class="card-body">
+                <h3 class="card-title mb-4" style="color: #D9C3AC;">Success! You bought this item!</h3>
+                <a href="{% url 'list' %}" class="btn text-white" style="background-color: #CF9963;">continue
+                    shopping</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="container card text-center mt-4" style="background-color: #2B2A29;">
+            <div class="card-body">
+                <h3 class="card-title mb-4" style="color: #D9C3AC;">Success! You added this item to your
+                    storefront!</h3>
+                <a href="{% url 'my_store' %}" class="btn" style="background-color: #AABA78; color: #2F3234;">my
+                    storefront</a>
+            </div>
+        </div>
+    {% endif %}
+
+
+    <div class=" container card mb-3 mt-3 text-white" style="background-color: #2B2A29;">
+        <div class="row g-0">
+
+            <div class="col-4 mt-3 mb-3 " style=" width: 30%;">
+                <img src="../../data/{{ product.img }}" class="image-fluid" style="object-fit:cover; width: 100%"
+                     alt="{{ product.img }}">
+            </div>
+
+            <div class="col-md-8 ms-4">
+                <div class="card-body" style="position: relative; height: 100%;">
+                    <h3 class="card-title" style="color: #CF9963">{{ product.title }}</h3>
+                    <p class="mb-5" style="margin-top: -20px; color: #DEE2E6">
+                        ____________________________________________________________________________</p>
+                    <p class="card-text" style="white-space: pre-line;">{{ product.summary }}</p>
+                    <p class="card-text" style="white-space: pre-line;">{{ product.specs }}</p>
+
+                    <div class="container mb-2" style="position: absolute; bottom: 0">
+                        <div class="row justify-content-between">
+                            <div class="col-4">
+                                <div>
+                                    <span class="h3 me-2 mt-2">${{ product.price }}</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+{% endblock %}
+{% block title %}
+    <title>{{ product.title }}</title>
+{% endblock %}
