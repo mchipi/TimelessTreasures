@@ -1,0 +1,45 @@
+# configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tt-config
+  namespace: tt
+data:
+  DJANGO_SETTINGS_MODULE: "ttProject.settings"
+---
+# secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tt-secrets
+  namespace: tt
+data:
+  SECRET_KEY: pFYdvxwvJlW8ObtN6QORMIG19SlBx_gSkce_clD-YIsEPiQUguwRq8W2hIxBlPYM58c
+---
+# deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  namespace: tt
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: django-app
+  template:
+    metadata:
+      labels:
+        app: django-app
+    spec:
+      containers:
+        - name: tt-container
+          image: mchipi/timelesstreasures:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: tt-config
+            - secretRef:
+                name: tt-secrets

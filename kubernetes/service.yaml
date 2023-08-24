@@ -1,0 +1,13 @@
+# service
+apiVersion: v1
+kind: Service
+metadata:
+  name: tt-service
+  namespace: tt
+spec:
+  selector:
+    app: django-app
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081

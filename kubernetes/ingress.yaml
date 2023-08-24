@@ -1,0 +1,19 @@
+# ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tt-ingress
+  namespace: tt
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: tt-service
+            port:
+              number: 8081
